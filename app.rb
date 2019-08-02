@@ -6,4 +6,8 @@ require 'active_record'
 
 class UnsecretPassword < Sinatra::Base
   helpers Sinatra::Cookies
+
+  get '/' do
+    erb :top
+  end
 end
