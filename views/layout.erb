@@ -10,7 +10,19 @@
   <header class="mdc-top-app-bar mdc-top-app-bar--fixed" style="background-color: #ec6d71">
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <span class="mdc-top-app-bar__title"><a class="title-anchor" href="/">CSS Proud</a></span> 
+        <span class="mdc-top-app-bar__title"><a class="navbar-anchor" href="/">CSS Proud</a></span> 
+      </section>
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+        <% if user %>
+          <form action="/logout" method="post" name="form1">
+            <input type="hidden" name="token" value=<%= user.sessionid %>>
+            <a type="submit" class="navbar-anchor" href="javascript:form1.submit()"> logout</a>
+          </form>
+        <% else %>
+          <a class="navbar-anchor"  href="/login" >
+            login
+          </a>
+        <% end %>
       </section>
     </div>
   </header>
