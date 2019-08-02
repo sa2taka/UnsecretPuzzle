@@ -1,2 +1,2 @@
-create table users(id char(16) primary key, password char(60), sessionid char(64));
+create table users(id char(16) primary key, password char(60), sessionid char(23));
 create table styles(id char(32) primary key, style varchar(10000), user_id char(10));

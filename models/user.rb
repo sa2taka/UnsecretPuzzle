@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def self.generate_sessionid(string)
-    Digest::SHA512.digest(string).split('').map { |c| c.ord > 127 ? '1' : '0'}.join
+    bin = Digest::SHA512.digest(string).split('').map { |c| c.ord > 127 ? '1' : '0'}.join
+    bin.scan(/.{1,8}/).map { |b| b.to_i(2).to_s(16) }.join('_')
   end
 end
