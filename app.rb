@@ -10,4 +10,8 @@ class UnsecretPassword < Sinatra::Base
   get '/' do
     erb :top
   end
+
+  get '/login' do
+    erb :login
+  end
 end

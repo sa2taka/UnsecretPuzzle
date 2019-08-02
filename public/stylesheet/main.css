@@ -14,3 +14,15 @@ a.title-anchor, a.title-anchor:visited {
   margin-right: auto;
   position: relative;
 }
+
+.button-area {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-flow: column;
+}
+
+.button-area > *{
+  margin-top: 12px;
+}
