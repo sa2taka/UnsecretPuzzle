@@ -1,8 +1,9 @@
 body {
   margin: 0;
+  font-variant-ligatures: normal;
 }
 
-a.title-anchor, a.title-anchor:visited {
+a.navbar-anchor, a.navbar-anchor:visited {
   color: white;
   text-decoration: none;
 }

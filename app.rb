@@ -9,11 +9,20 @@ require_relative './models'
 class UnsecretPassword < Sinatra::Base
   helpers Sinatra::Cookies
 
+  helpers do
+    def user
+      User.find_by(sessionid: cookies[:sessionid])
+    end
+  end
+
   get '/' do
     erb :top
   end
 
   get '/login' do
+    if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
+      redirect '/'
+    end
     @message = ''
     erb :login
   end
@@ -39,5 +48,10 @@ class UnsecretPassword < Sinatra::Base
       @message = 'ユーザー名またはパスワードが間違っています'
       return erb :login
     end
+  end
+
+  post '/logout' do
+    cookies['sessionid'] = ''
+    redirect '/'
   end
 end
