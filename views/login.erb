@@ -1,8 +1,12 @@
+<% unless @message&.empty? %>
+  <%= @message %>
+<% end %>
+
 <form action="/login" method="post" class="button-area">
   <span style="display:flex;justify-content: center;text-align: center;">
     <span style="margin: auto 1em">ユーザー名</span> 
     <div class="mdc-text-field mdc-text-field--outlined answer-input">
-      <input name="a" class="mdc-text-field__input" id="text-field-hero-input">
+      <input name="name" class="mdc-text-field__input" id="text-field-hero-input">
       <div class="mdc-notched-outline">
         <div class="mdc-notched-outline__leading"></div>
         <div class="mdc-notched-outline__trailing"></div>
@@ -13,7 +17,7 @@
   <span style="display:flex;justify-content: center;text-align: center;">
     <span style="margin: auto 1em">パスワード</span> 
     <div class="mdc-text-field mdc-text-field--outlined answer-input">
-      <input name="r" class="mdc-text-field__input" id="text-field-hero-input">
+      <input name="password" class="mdc-text-field__input" id="text-field-hero-input">
       <div class="mdc-notched-outline">
         <div class="mdc-notched-outline__leading"></div>
         <div class="mdc-notched-outline__trailing"></div>
