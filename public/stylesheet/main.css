@@ -3,7 +3,8 @@ body {
   font-variant-ligatures: normal;
 }
 
-a.navbar-anchor, a.navbar-anchor:visited {
+a.navbar-anchor,
+a.navbar-anchor:visited {
   color: white;
   text-decoration: none;
 }
@@ -24,6 +25,37 @@ a.navbar-anchor, a.navbar-anchor:visited {
   flex-flow: column;
 }
 
-.button-area > *{
+.button-area > * {
   margin-top: 12px;
+}
+
+.navbar-items > * {
+  margin-right: 1em;
+}
+
+.lattice {
+  display: flex;
+  flex-flow: column;
+}
+
+.lattice-rows {
+  display: flex;
+  justify-content: flex-start;
+  text-align: flex-start;
+}
+
+.lattice-item {
+  border: 1px black solid;
+  width: 1.4em;
+  height: 1.4em;
+  display: inline-block;
+  text-align: center;
+}
+
+.lattice-label {
+  /* lattice-itemの実測値に合わせて0.39を足している */
+  width: calc(1.5em + 0.39px);
+  height: calc(1.5em + 0.39px);
+  display: inline-block;
+  text-align: center;
 }

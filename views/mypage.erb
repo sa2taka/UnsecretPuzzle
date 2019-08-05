@@ -1,0 +1,21 @@
+<h2><%= user.id %> のマイページ</h2>
+
+<h1>秘密のパスワードはこちら!</h1>
+
+<div class="lattice">
+<div class="lattice-rows">
+  <% 9.times do |i| %>
+  <div class="lattice-label"><%= i unless i.zero? %></div>
+  <% end %>
+</div>
+<% char = 'A' %>
+<% user.sessionid.split('_').map{ |h| h.to_i(16).to_s(2).rjust(8, '0') }.each do |b| %>
+  <div class="lattice-rows">
+    <div class="lattice-label"><%= char %></div>
+    <% char.succ! %>
+    <% b.chars do |c| %>
+      <div class="lattice-item"><%= "●" if c == '1'%></div>
+    <% end %>
+  </div>
+<% end %>
+</div>
