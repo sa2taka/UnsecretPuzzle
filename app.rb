@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
-require "sinatra/cookies"
+require 'sinatra/cookies'
 require 'active_record'
 
 require_relative './models'
@@ -48,6 +48,13 @@ class UnsecretPassword < Sinatra::Base
       @message = 'ユーザー名またはパスワードが間違っています'
       return erb :login
     end
+  end
+
+  get '/mypage' do
+    unless User.find_by(sessionid: cookies[:sessionid])
+      redirect '/login'
+    end
+    erb :mypage
   end
 
   post '/logout' do
