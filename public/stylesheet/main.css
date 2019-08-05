@@ -3,7 +3,8 @@ body {
   font-variant-ligatures: normal;
 }
 
-a.navbar-anchor, a.navbar-anchor:visited {
+a.navbar-anchor,
+a.navbar-anchor:visited {
   color: white;
   text-decoration: none;
 }
@@ -24,6 +25,10 @@ a.navbar-anchor, a.navbar-anchor:visited {
   flex-flow: column;
 }
 
-.button-area > *{
+.button-area > * {
   margin-top: 12px;
+}
+
+.navbar-items > * {
+  margin-right: 1em;
 }
