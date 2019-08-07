@@ -59,3 +59,23 @@ a.navbar-anchor:visited {
   display: inline-block;
   text-align: center;
 }
+
+.target-html-area {
+  display: flex;
+}
+
+.view-target-html,
+.raw-target-html {
+  padding: 0.4em 2em;
+  border: 1px solid black;
+  justify-content: center;
+}
+
+.to-view-from-html {
+  margin: auto 2em;
+}
+
+.to-edit-button {
+  margin-top: 1.2em;
+  width: 80%;
+}

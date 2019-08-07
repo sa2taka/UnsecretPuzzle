@@ -1,0 +1,39 @@
+<h2>対象となるhtml</h2>
+
+<div class="target-html-area">
+<!-- 以下は気持ち悪くても修正しない(見た目が崩れる) -->
+  <pre class="raw-target-html">
+<%= html_safe $TARGET_HTML %></pre>
+</div>
+
+<form action="/preview" method="post" style="margin-top: 2em;">
+  <label>css(記述しましょう!)</label>
+  <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
+    <textarea id="text-field-fullwidth-textarea-helper" class="mdc-text-field__input" style="height: 640px;">
+.top-level {
+
+}
+
+.posts-area {
+
+}
+
+.post {
+
+}
+
+.post-title {
+
+}
+
+.post-content {
+
+}
+    </textarea>
+    <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+      <div class="mdc-notched-outline__leading"></div>
+      <div class="mdc-notched-outline__trailing"></div>
+    </div>
+  </div>
+  <a class="mdc-button mdc-button--raised" style="margin-top: 1.2em;">プレビュー</a>
+</form>

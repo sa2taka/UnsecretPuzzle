@@ -6,6 +6,27 @@ require 'active_record'
 
 require_relative './models'
 
+$TARGET_HTML = <<EOS
+<div class="top-level">
+  <h1 class="title">タイトル</h1>
+  <article class="posts-area">
+    <article class="post">
+      <h2 class="post-title">ポスト1</h2>
+      <div class="post-content">
+        <p>post, post and post.</p>
+      </div>
+    </article>
+    <article class="post">
+      <h2 class="post-title">ポスト2</h2>
+      <div class="post-content">
+        <p>get, get and get.</p>
+      </div>
+    </article>
+  </article>
+</div>
+EOS
+$TARGET_HTML.strip!.freeze
+
 class UnsecretPassword < Sinatra::Base
   helpers Sinatra::Cookies
 
@@ -13,14 +34,26 @@ class UnsecretPassword < Sinatra::Base
     def user
       User.find_by(sessionid: cookies[:sessionid])
     end
+
+    def html_safe(text)
+      Rack::Utils.escape_html(text)
+    end
   end
 
   get '/' do
     if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
-      erb :main
+      erb :top
     else
       erb :introduction
     end
+  end
+
+  get '/rules' do
+    erb :rule
+  end
+
+  get '/edit' do
+    erb :edit
   end
 
   get '/login' do

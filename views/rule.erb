@@ -1,0 +1,25 @@
+<h2>ルール</h2>
+
+<ul>
+  <li>以下のhtmlをcssで装飾する。ただし、cssは10,000文字以下</li>
+</ul>
+
+<h4>以上!</h4>
+
+<h2>対象となるhtml</h2>
+
+<div class="target-html-area">
+<!-- 以下は気持ち悪くても修正しない(見た目が崩れる) -->
+  <pre class="raw-target-html">
+<%= html_safe $TARGET_HTML %></pre>
+
+  <i class="material-icons to-view-from-html">
+  arrow_forward
+  </i>
+
+  <div class="view-target-html">
+   <%= $TARGET_HTML %>
+  </div>
+</div>
+
+<a class="mdc-button mdc-button--raised to-edit-button" href="/edit">早速CSSを記述する</a>
