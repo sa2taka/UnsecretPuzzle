@@ -57,6 +57,26 @@ class UnsecretPassword < Sinatra::Base
     erb :mypage
   end
 
+  get '/register' do
+    erb :register
+  end
+
+  post '/register' do
+    if params[:name]&.empty? || params[:password]&.empty?
+      @message = 'ユーザー名、パスワードは必須項目です'
+      return erb :register
+    end
+
+    if User.exists?(id: params[:name])
+      @message = 'すでに存在しているユーザー名です'
+      return erb :register
+    end
+
+    user = User.create(params[:name], params[:password])
+    cookies[:sessionid] = user.sessionid
+    redirect '/mypage'
+  end
+
   post '/logout' do
     cookies['sessionid'] = ''
     redirect '/'
