@@ -16,7 +16,11 @@ class UnsecretPassword < Sinatra::Base
   end
 
   get '/' do
-    erb :top
+    if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
+      erb :main
+    else
+      erb :introduction
+    end
   end
 
   get '/login' do
