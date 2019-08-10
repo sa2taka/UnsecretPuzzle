@@ -20,6 +20,7 @@
 <form name="send_form" action="/proud" method="post">
 <input type="hidden" name="id" value="<%= @id %>">
 <input type="hidden" name="token" value="<%= user.sessionid %>">
+<a class="mdc-button mdc-button--raised to-edit-button" href="/fix?id=<%= @id %>" style="--mdc-theme-primary: #00695C;">修正する</a>
 <a type="submit" class="mdc-button mdc-button--raised to-edit-button" href="javascript:send_form.submit();">管理者に自慢する</a>
 </form>
 

@@ -29,6 +29,29 @@ $TARGET_HTML = <<EOS
 EOS
 $TARGET_HTML.strip!.freeze
 
+$DEFAULT_STYLE = <<EOS
+.top-level {
+
+}
+
+.posts-area {
+
+}
+
+.post {
+
+}
+
+.post-title {
+
+}
+
+.post-content {
+
+}
+EOS
+$DEFAULT_STYLE.strip!.freeze
+
 class UnsecretPassword < Sinatra::Base
   helpers Sinatra::Cookies
 
@@ -59,29 +82,35 @@ class UnsecretPassword < Sinatra::Base
   end
 
   post '/preview' do
+    @id = params[:id]
     @style = params[:style]
     @decoded_style = Base64.encode64(@style)
     erb :preview
   end
 
   post '/post' do
-    @style =  Base64.decode64(params[:decoded_style])
+    @style = Base64.decode64(params[:decoded_style])
     user = User.find_by(sessionid: cookies[:sessionid])
     id = Base64.urlsafe_encode64(Digest::SHA256.digest(Time.now.to_s + user.id))
 
     s = Style.new
-    s.id = id
+    if Style.exists? params[:id]
+      s = Style.find(params[:id])
+    else
+      s.id = id
+      s.user_id = user.id
+    end
+
     s.style = @style
-    s.user_id = user.id
     s.save
 
-    redirect '/styles?id=' + id
+    redirect '/styles?id=' + s.id
   end
 
   get '/styles' do
     redirect '/' unless Style.exists?(params[:id])
     style_record = Style.find(params[:id])
-    @id = Style.find(params[:id]).id
+    @id = style_record.id
     @style = style_record.style
 
     erb :style
@@ -90,6 +119,16 @@ class UnsecretPassword < Sinatra::Base
   post '/proud' do
     @id = params[:id]
     erb :proud
+  end
+
+  get '/fix' do
+    redirect '/' unless Style.exists?(params[:id])
+
+    style_record = Style.find(params[:id])
+    @id = style_record.id
+    @style = style_record.style
+
+    erb :edit
   end
 
   get '/login' do

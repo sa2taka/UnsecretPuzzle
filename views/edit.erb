@@ -10,31 +10,14 @@
   <label>css(記述しましょう!)</label>
   <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
     <textarea name="style" class="mdc-text-field__input " style="height: 640px; line-height: 1.1em;">
-.top-level {
-
-}
-
-.posts-area {
-
-}
-
-.post {
-
-}
-
-.post-title {
-
-}
-
-.post-content {
-
-}
+<%= @style || $DEFAULT_STYLE%>
     </textarea>
     <div class="mdc-notched-outline mdc-notched-outline--upgraded">
       <div class="mdc-notched-outline__leading"></div>
       <div class="mdc-notched-outline__trailing"></div>
     </div>
   </div>
+  <input type="hidden" name="id" value="<%= @id || ''%>">
   <a type="submit" class="mdc-button mdc-button--raised" style="margin-top: 1.2em;"  href="javascript:preview_form.submit()">プレビュー</a>
 </form>
 

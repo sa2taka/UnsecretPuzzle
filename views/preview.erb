@@ -18,6 +18,7 @@
 </div>
 
 <form name="send_form" action="/post" method="post">
+<input type="hidden" name="id" value="<%= @id || '' %>">
 <input type="hidden" name="token" value=<%= user.sessionid %>>
 <input type="hidden" name="decoded_style" value="<%= @decoded_style %>">
 <a type="submit" class="mdc-button mdc-button--raised to-edit-button" href="javascript:send_form.submit();">投稿する</a>
