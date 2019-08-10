@@ -17,7 +17,7 @@
         <% if user %>
           <a type="submit" class="navbar-anchor" href="/mypage">マイページ</a>
           <form action="/logout" method="post" name="form1">
-            <input type="hidden" name="token" value=<%= user.sessionid %>>
+            <input type="hidden" name="token" value=<%= user&.sessionid %>>
             <a type="submit" class="navbar-anchor" href="javascript:form1.submit()">ログアウト</a>
           </form>
         <% else %>

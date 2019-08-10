@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
@@ -7,48 +9,50 @@ require 'base64'
 require 'digest/sha2'
 
 require_relative './models'
+require_relative './config.rb'
+require_relative './libs/scraper'
 
-$TARGET_HTML = <<EOS
-<div class="top-level">
-  <h1 class="title">タイトル</h1>
-  <article class="posts-area">
-    <article class="post">
-      <h2 class="post-title">ポスト1</h2>
-      <div class="post-content">
-        <p>post, post and post.</p>
-      </div>
+$TARGET_HTML = <<~EOS
+  <div class="top-level">
+    <h1 class="title">タイトル</h1>
+    <article class="posts-area">
+      <article class="post">
+        <h2 class="post-title">ポスト1</h2>
+        <div class="post-content">
+          <p>post, post and post.</p>
+        </div>
+      </article>
+      <article class="post">
+        <h2 class="post-title">ポスト2</h2>
+        <div class="post-content">
+          <p>get, get and get.</p>
+        </div>
+      </article>
     </article>
-    <article class="post">
-      <h2 class="post-title">ポスト2</h2>
-      <div class="post-content">
-        <p>get, get and get.</p>
-      </div>
-    </article>
-  </article>
-</div>
+  </div>
 EOS
 $TARGET_HTML.strip!.freeze
 
-$DEFAULT_STYLE = <<EOS
-.top-level {
+$DEFAULT_STYLE = <<~EOS
+  .top-level {
 
-}
+  }
 
-.posts-area {
+  .posts-area {
 
-}
+  }
 
-.post {
+  .post {
 
-}
+  }
 
-.post-title {
+  .post-title {
 
-}
+  }
 
-.post-content {
+  .post-content {
 
-}
+  }
 EOS
 $DEFAULT_STYLE.strip!.freeze
 
@@ -118,6 +122,8 @@ class UnsecretPassword < Sinatra::Base
 
   post '/proud' do
     @id = params[:id]
+
+    Thread.new { Scraper.scrape($top_level, @id) }.run
     erb :proud
   end
 
@@ -163,9 +169,7 @@ class UnsecretPassword < Sinatra::Base
   end
 
   get '/mypage' do
-    unless User.find_by(sessionid: cookies[:sessionid])
-      redirect '/login'
-    end
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     erb :mypage
   end
 

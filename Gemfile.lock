@@ -15,15 +15,25 @@ GEM
     arel (9.0.0)
     backports (3.15.0)
     bcrypt (3.1.13)
+    childprocess (1.0.1)
+      rake (< 13.0)
     concurrent-ruby (1.1.5)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     mustermann (1.0.3)
+    nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
+    rake (12.3.3)
+    rubyzip (1.2.3)
+    selenium-webdriver (3.142.3)
+      childprocess (>= 0.5, < 2.0)
+      rubyzip (~> 1.2, >= 1.2.2)
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -41,6 +51,10 @@ GEM
     tilt (2.0.9)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    webdrivers (4.1.2)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (>= 3.0, < 4.0)
 
 PLATFORMS
   ruby
@@ -48,9 +62,11 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  selenium-webdriver
   sinatra
   sinatra-contrib
   sqlite3
+  webdrivers
 
 BUNDLED WITH
    1.17.2
