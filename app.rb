@@ -82,10 +82,12 @@ class UnsecretPassword < Sinatra::Base
   end
 
   get '/edit' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     erb :edit
   end
 
   post '/preview' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     @id = params[:id]
     @style = params[:style]
     @decoded_style = Base64.encode64(@style)
@@ -93,6 +95,7 @@ class UnsecretPassword < Sinatra::Base
   end
 
   post '/post' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     @style = Base64.decode64(params[:decoded_style])
     user = User.find_by(sessionid: cookies[:sessionid])
     id = Base64.urlsafe_encode64(Digest::SHA256.digest(Time.now.to_s + user.id))
@@ -112,6 +115,7 @@ class UnsecretPassword < Sinatra::Base
   end
 
   get '/styles' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     redirect '/' unless Style.exists?(params[:id])
     style_record = Style.find(params[:id])
     @id = style_record.id
@@ -121,6 +125,7 @@ class UnsecretPassword < Sinatra::Base
   end
 
   post '/proud' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     @id = params[:id]
 
     Thread.new { Scraper.scrape($top_level, @id) }.run
@@ -128,6 +133,7 @@ class UnsecretPassword < Sinatra::Base
   end
 
   get '/fix' do
+    redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     redirect '/' unless Style.exists?(params[:id])
 
     style_record = Style.find(params[:id])

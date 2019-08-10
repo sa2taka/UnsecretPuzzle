@@ -3,7 +3,6 @@
 <head>
   <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href="/stylesheet/main.css" rel="stylesheet" />
 </head>
@@ -17,7 +16,7 @@
         <% if user %>
           <a type="submit" class="navbar-anchor" href="/mypage">マイページ</a>
           <form action="/logout" method="post" name="form1">
-            <input type="hidden" name="token" value=<%= user&.sessionid %>>
+            <input type="hidden" name="token" value=<%= user.sessionid %>>
             <a type="submit" class="navbar-anchor" href="javascript:form1.submit()">ログアウト</a>
           </form>
         <% else %>
