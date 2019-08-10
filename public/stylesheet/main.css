@@ -86,6 +86,7 @@ a.navbar-anchor:visited {
   justify-content: center;
   min-width: 40em;
   max-width: 100em;
+  white-space: pre-wrap;
 }
 
 .raw-title {
