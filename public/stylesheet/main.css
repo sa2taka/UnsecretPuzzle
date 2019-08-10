@@ -79,3 +79,23 @@ a.navbar-anchor:visited {
   margin-top: 1.2em;
   width: 80%;
 }
+
+.raw-target-style {
+  padding: 0.4em 2em;
+  border: 1px solid black;
+  justify-content: center;
+  min-width: 40em;
+  max-width: 100em;
+}
+
+.raw-title {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 4px 0;
+}
+
+.preview-area {
+  padding: 0.4em 2em;
+  border: 1px solid black;
+  width: 80%;
+}

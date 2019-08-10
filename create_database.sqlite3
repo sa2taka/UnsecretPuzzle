@@ -1,4 +1,4 @@
 create table users(id char(16) primary key, password char(60), sessionid char(23));
-create table styles(id char(32) primary key, style varchar(10000), user_id char(16));
+create table styles(id char(44) primary key, style varchar(10000), user_id char(16));
 
 insert into users values ('admin', '$2a$12$LhiodBXV1BpRFzUifNFnTuQ3QzxExa2wLGksi3LqexbgAQLLvc9bW', '3e_d6_e0_1a_ca_24_4a_37')

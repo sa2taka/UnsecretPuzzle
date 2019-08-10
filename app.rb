@@ -3,6 +3,8 @@ require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/cookies'
 require 'active_record'
+require 'base64'
+require 'digest/sha2'
 
 require_relative './models'
 
@@ -54,6 +56,40 @@ class UnsecretPassword < Sinatra::Base
 
   get '/edit' do
     erb :edit
+  end
+
+  post '/preview' do
+    @style = params[:style]
+    @decoded_style = Base64.encode64(@style)
+    erb :preview
+  end
+
+  post '/post' do
+    @style =  Base64.decode64(params[:decoded_style])
+    user = User.find_by(sessionid: cookies[:sessionid])
+    id = Base64.urlsafe_encode64(Digest::SHA256.digest(Time.now.to_s + user.id))
+
+    s = Style.new
+    s.id = id
+    s.style = @style
+    s.user_id = user.id
+    s.save
+
+    redirect '/styles?id=' + id
+  end
+
+  get '/styles' do
+    redirect '/' unless Style.exists?(params[:id])
+    style_record = Style.find(params[:id])
+    @id = Style.find(params[:id]).id
+    @style = style_record.style
+
+    erb :style
+  end
+
+  post '/proud' do
+    @id = params[:id]
+    erb :proud
   end
 
   get '/login' do
