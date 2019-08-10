@@ -151,6 +151,14 @@ class UnsecretPassword < Sinatra::Base
     erb :login
   end
 
+  get '/secret-puzzle-login' do
+    if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
+      redirect '/'
+    end
+    @message = ''
+    erb :secret_puzzle
+  end
+
   post '/login' do
     if params[:name]&.empty? || params[:password]&.empty?
       @message = 'ユーザー名またはパスワードが間違っています'

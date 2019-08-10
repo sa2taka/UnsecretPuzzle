@@ -36,6 +36,7 @@ a.navbar-anchor:visited {
 .lattice {
   display: flex;
   flex-flow: column;
+  margin-bottom: 24px;
 }
 
 .lattice-rows {
@@ -99,4 +100,24 @@ a.navbar-anchor:visited {
   padding: 0.4em 2em;
   border: 1px solid black;
   width: 80%;
+}
+
+.lattice-toggle-button {
+  color: rgba(0, 0, 0, 0);
+}
+
+.lattice-toggle-button:hover {
+  background-color: rgba(133, 228, 38, 0.4);
+}
+
+input[type='checkbox']:checked + .lattice-toggle-button {
+  color: rgba(0, 0, 0, 1);
+}
+
+.lattice-item-hidden {
+  display: none;
+}
+
+.login-button {
+  margin-top: 24px;
 }
