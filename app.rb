@@ -71,6 +71,8 @@ class UnsecretPassword < Sinatra::Base
 
   get '/' do
     if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
+      return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
       erb :top
     else
       erb :introduction
@@ -83,11 +85,15 @@ class UnsecretPassword < Sinatra::Base
 
   get '/edit' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     erb :edit
   end
 
   post '/preview' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     @id = params[:id]
     @style = params[:style]
     @decoded_style = Base64.encode64(@style)
@@ -96,6 +102,8 @@ class UnsecretPassword < Sinatra::Base
 
   post '/post' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     @style = Base64.decode64(params[:decoded_style])
     user = User.find_by(sessionid: cookies[:sessionid])
     id = Base64.urlsafe_encode64(Digest::SHA256.digest(Time.now.to_s + user.id))
@@ -116,6 +124,8 @@ class UnsecretPassword < Sinatra::Base
 
   get '/styles' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     redirect '/' unless Style.exists?(params[:id])
     style_record = Style.find(params[:id])
     @id = style_record.id
@@ -126,6 +136,8 @@ class UnsecretPassword < Sinatra::Base
 
   post '/proud' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     @id = params[:id]
 
     Thread.new { Scraper.scrape($top_level, @id) }.run
@@ -134,6 +146,8 @@ class UnsecretPassword < Sinatra::Base
 
   get '/fix' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
+
     redirect '/' unless Style.exists?(params[:id])
 
     style_record = Style.find(params[:id])
@@ -177,6 +191,7 @@ class UnsecretPassword < Sinatra::Base
       cookies['sessionid'] = user.sessionid
 
       return erb :flag if user.id == 'admin'
+
       redirect '/'
     else
       @message = 'ユーザー名またはパスワードが間違っています'
