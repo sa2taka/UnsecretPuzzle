@@ -72,7 +72,6 @@ class UnsecretPassword < Sinatra::Base
   get '/' do
     if (sessionid = cookies['sessionid']) && User.find_by(sessionid: sessionid)
       return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:this_1s_4dmin_flag] != '!qazxsw2'
-
       erb :top
     else
       erb :introduction
