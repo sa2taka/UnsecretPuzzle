@@ -175,6 +175,8 @@ class UnsecretPassword < Sinatra::Base
 
     if user.authenticate(params[:password])
       cookies['sessionid'] = user.sessionid
+
+      return erb :flag if user.id == 'admin'
       redirect '/'
     else
       @message = 'ユーザー名またはパスワードが間違っています'
@@ -191,7 +193,9 @@ class UnsecretPassword < Sinatra::Base
 
     sessionid = bin_array.map { |b| b.join.to_i(2).to_s(16) }.join('_')
     user = User.find_by(sessionid: sessionid)
-    if user
+    if user.id == 'admin'
+      return erb :flag
+    elsif user
       cookies['sessionid'] = user.sessionid
       redirect '/'
     else
