@@ -182,6 +182,24 @@ class UnsecretPassword < Sinatra::Base
     end
   end
 
+  post '/secret-puzzle-login' do
+    bin_array = Array.new(8) { Array.new(8, 0) }
+    params[:sessionid].each do |s|
+      x, y = s.split(',').map(&:to_i)
+      bin_array[y][x] = 1
+    end
+
+    sessionid = bin_array.map { |b| b.join.to_i(2).to_s(16) }.join('_')
+    user = User.find_by(sessionid: sessionid)
+    if user
+      cookies['sessionid'] = user.sessionid
+      redirect '/'
+    else
+      @message = '秘密のパスワードが間違っています'
+      return erb :secret_puzzle
+    end
+  end
+
   get '/mypage' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
     erb :mypage
