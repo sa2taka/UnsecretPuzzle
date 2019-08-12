@@ -15,10 +15,11 @@ class Scraper
     driver.get(top_level.to_s)
     sleep 6
     driver.manage.add_cookie('name': 'sessionid', 'value': User.find('admin').sessionid)
-
-    driver.get("#{top_level}/styles?id=#{id}&this_1s_4dmin_flag=!qazxsw2")
-    sleep 2
-  ensure
-    driver.quit
+    begin
+      driver.get("#{top_level}/styles?id=#{id}&this_1s_4dmin_flag=!qazxsw2")
+      sleep 2
+    ensure
+      driver.quit
+    end
   end
 end
