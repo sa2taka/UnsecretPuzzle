@@ -107,6 +107,10 @@ class UnsecretPassword < Sinatra::Base
     user = User.find_by(sessionid: cookies[:sessionid])
     id = Base64.urlsafe_encode64(Digest::SHA256.digest(Time.now.to_s + user.id))
 
+    if @style.length > 10000
+      redirect '/edit'
+    end
+
     s = Style.new
     if Style.exists? params[:id]
       s = Style.find(params[:id])
@@ -230,6 +234,11 @@ class UnsecretPassword < Sinatra::Base
   post '/register' do
     if params[:name]&.empty? || params[:password]&.empty?
       @message = 'ユーザー名、パスワードは必須項目です'
+      return erb :register
+    end
+
+    if params[:name].length > 16
+      @message = 'ユーザー名は16文字以下である必要があります'
       return erb :register
     end
 

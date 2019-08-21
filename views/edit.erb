@@ -9,7 +9,7 @@
 <form action="/preview" name="preview_form" method="post" style="margin-top: 2em;">
   <label>css(記述しましょう!)</label>
   <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
-    <textarea name="style" class="mdc-text-field__input " style="height: 640px; line-height: 1.1em;">
+    <textarea name="style" class="mdc-text-field__input " style="height: 640px; line-height: 1.1em;"  maxlength="10000">
 <%= @style || $DEFAULT_STYLE%>
     </textarea>
     <div class="mdc-notched-outline mdc-notched-outline--upgraded">
