@@ -16,5 +16,6 @@ WORKDIR $APP_ROOT
 RUN bundle install && \
   sqlite3 data.db < create_database.sqlite3
 
+ENV APP_ENV production
 EXPOSE  9292
 CMD ["rackup", "-o", "0.0.0.0"]
