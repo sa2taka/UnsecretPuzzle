@@ -17,5 +17,6 @@ RUN bundle install && \
   sqlite3 data.db < create_database.sqlite3
 
 ENV APP_ENV production
+ENV flag FLAG{|1ke_r0ckm@n_secret_puzz|e}
 EXPOSE  9292
 CMD ["rackup", "-o", "0.0.0.0"]
