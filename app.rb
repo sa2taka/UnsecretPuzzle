@@ -225,6 +225,7 @@ class UnsecretPassword < Sinatra::Base
 
   get '/mypage' do
     redirect '/login' unless User.find_by(sessionid: cookies[:sessionid])
+    return erb :if_admin if User.find_by(sessionid: cookies[:sessionid]).id == 'admin' && params[:is_it_admin] != '!qazxsw2'
     erb :mypage
   end
 
