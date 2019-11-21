@@ -70,7 +70,7 @@ class UnsecretPassword < Sinatra::Base
     end
     
     def css_safe(text)
-      text.gsub('<', '&lt').gsub('>', '&gt')
+      text.gsub('<', '&lt;').gsub('>', '&gt;')
     end
   end
 
