@@ -68,6 +68,10 @@ class UnsecretPassword < Sinatra::Base
     def html_safe(text)
       Rack::Utils.escape_html(text)
     end
+    
+    def css_safe(text)
+      text.gsub('<', '&lt').gsub('>', '&gt')
+    end
   end
 
   get '/' do
